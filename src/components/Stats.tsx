@@ -9,9 +9,9 @@ export function Stats() {
   return (
     <section className="bg-black py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4" data-reveal-group>
           {stats.map((s) => (
-            <div key={s.label} className="text-center">
+            <div key={s.label} data-reveal className="text-center">
               <p className="text-4xl sm:text-5xl font-black text-[#FF751F] mb-2 tabular-nums">
                 {s.value}
               </p>

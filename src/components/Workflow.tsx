@@ -41,7 +41,7 @@ export function Workflow() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
-        <div className="mb-16 max-w-xl">
+        <div className="mb-16 max-w-xl" data-reveal>
           <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
             How We Work
           </p>
@@ -53,11 +53,11 @@ export function Workflow() {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-100" data-reveal-group>
           {steps.map((step) => {
             const Icon = step.icon;
             return (
-              <div key={step.number} className="bg-white p-8 flex flex-col gap-8">
+              <div key={step.number} data-reveal className="bg-white p-8 flex flex-col gap-8">
                 {/* Top row: icon + number */}
                 <div className="flex items-start justify-between">
                   <div

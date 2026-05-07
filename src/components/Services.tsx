@@ -57,7 +57,7 @@ export function Services() {
 
         {/* Header */}
         <div className="grid lg:grid-cols-2 gap-6 items-end mb-16">
-          <div>
+          <div data-reveal>
             <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
               What We Build
             </p>
@@ -67,13 +67,13 @@ export function Services() {
               <span className="text-zinc-300">Drive Results.</span>
             </h2>
           </div>
-          <p className="text-zinc-500 text-lg leading-relaxed lg:max-w-sm lg:ml-auto">
+          <p data-reveal data-reveal-delay="120" className="text-zinc-500 text-lg leading-relaxed lg:max-w-sm lg:ml-auto">
             Every service is a fully staffed engagement — not a freelancer handoff. We own the outcome.
           </p>
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-group>
           {services.map((s, i) => {
             const Icon = s.icon;
             const isHovered = hovered === i;
@@ -81,6 +81,7 @@ export function Services() {
             return (
               <div
                 key={s.title}
+                data-reveal
                 className="relative flex flex-col justify-between rounded-2xl overflow-hidden cursor-pointer"
                 style={{
                   background: isHovered ? s.color : "#f3f3f2",

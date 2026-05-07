@@ -5,7 +5,7 @@ export function CTA() {
     <section id="contact" className="bg-white py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
-        <div className="relative rounded-3xl border border-zinc-200 overflow-hidden bg-zinc-950 px-8 py-16 sm:px-16 sm:py-20">
+        <div data-reveal="scale" className="relative rounded-3xl border border-zinc-200 overflow-hidden bg-zinc-950 px-8 py-16 sm:px-16 sm:py-20">
 
           {/* Background glows */}
           <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF751F]/20 rounded-full blur-3xl pointer-events-none" />

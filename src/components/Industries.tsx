@@ -121,7 +121,7 @@ export function Industries() {
       {/* Header — constrained to content width */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-12">
-          <div>
+          <div data-reveal>
             <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
               Our Expertise
             </p>
@@ -132,7 +132,7 @@ export function Industries() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-4 flex-shrink-0">
+          <div data-reveal data-reveal-delay="160" className="flex items-center gap-4 flex-shrink-0">
             <span className="text-sm text-zinc-500 font-medium tabular-nums hidden sm:block">
               {String(page + 1).padStart(2, "0")} — {String(maxPage + 1).padStart(2, "0")}
             </span>

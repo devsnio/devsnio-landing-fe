@@ -65,16 +65,16 @@ export function WhyUs() {
 
         {/* Header */}
         <div className="mb-16">
-          <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
+          <p data-reveal className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
             Why devsnio
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <h2 className="text-4xl sm:text-5xl font-black text-black tracking-tight leading-tight">
+            <h2 data-reveal className="text-4xl sm:text-5xl font-black text-black tracking-tight leading-tight">
               Not Just Devs.
               <br />
               <span className="text-zinc-300">Product Partners.</span>
             </h2>
-            <p className="text-zinc-500 text-base leading-relaxed max-w-xs">
+            <p data-reveal data-reveal-delay="160" className="text-zinc-500 text-base leading-relaxed max-w-xs">
               Most agencies write code. We think about your users, your market,
               and your growth — then write the code that moves those numbers.
             </p>
