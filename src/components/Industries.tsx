@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import {
-  ChevronLeft, ChevronRight, ArrowUpRight,
+  ChevronLeft, ChevronRight,
   ShoppingBag, CreditCard, Cpu, Heart, Building2, GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -52,19 +52,13 @@ function IndustryCard({ ind, index }: { ind: Industry; index: number }) {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col p-6">
         {/* Top row */}
-        <div className="flex items-start justify-between">
+        <div className="flex items-start">
           <div
             className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{ background: `rgba(${glassAlpha},0.14)` }}
           >
             <Icon size={20} strokeWidth={1.8} style={{ color: tc }} />
           </div>
-          <span
-            className="text-xs font-bold tabular-nums tracking-widest uppercase"
-            style={{ color: tc, opacity: 0.35 }}
-          >
-            {num}
-          </span>
         </div>
 
         {/* Tag chip */}
@@ -86,15 +80,9 @@ function IndustryCard({ ind, index }: { ind: Industry; index: number }) {
           <p className="text-2xl font-black leading-tight mb-2" style={{ color: tc }}>
             {ind.name}
           </p>
-          <p className="text-sm leading-relaxed mb-4" style={{ color: tc, opacity: 0.72 }}>
+          <p className="text-sm leading-relaxed" style={{ color: tc, opacity: 0.72 }}>
             {ind.desc}
           </p>
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ background: `rgba(${glassAlpha},0.18)` }}
-          >
-            <ArrowUpRight size={16} style={{ color: tc }} />
-          </div>
         </div>
       </div>
     </div>
