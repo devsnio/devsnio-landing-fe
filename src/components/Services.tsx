@@ -52,7 +52,7 @@ export function Services() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section id="services" className="bg-white py-24 sm:py-32">
+    <section id="services" className="bg-white pb-24 sm:pb-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}

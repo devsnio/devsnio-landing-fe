@@ -61,7 +61,7 @@ function Badge({ name, slug, color }: { name: string; slug: string | null; color
 
 export function TechStack() {
   return (
-    <section className="bg-zinc-50 border-y border-zinc-100 py-16 overflow-hidden">
+    <section className="bg-zinc-50 border-y border-zinc-100 py-24 sm:py-32 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-10">
         <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">Tech Stack</p>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">

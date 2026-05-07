@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Mail, MessageSquare, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us — devsnio",
@@ -13,26 +13,23 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@devsnio.com",
-    href: "mailto:hello@devsnio.com",
+    value: "info@devsnio.com",
+    href: "mailto:info@devsnio.com",
+    accent: "#FF751F",
   },
   {
-    icon: MessageSquare,
-    label: "WhatsApp",
-    value: "+880 — contact for number",
-    href: "https://wa.me/880",
+    icon: Phone,
+    label: "Phone",
+    value: "+880 1521 109 475",
+    href: "tel:+8801521109475",
+    accent: "#00C6A9",
   },
   {
     icon: MapPin,
-    label: "Based in",
-    value: "Dhaka, Bangladesh (Remote-first)",
+    label: "Location",
+    value: "Gulshan 1, Dhaka, Bangladesh 1212",
     href: null,
-  },
-  {
-    icon: Clock,
-    label: "Response time",
-    value: "Within 24 hours",
-    href: null,
+    accent: "#7B5CFF",
   },
 ];
 
@@ -41,6 +38,7 @@ const services = [
   "AI Development",
   "Custom Software",
   "SaaS Building",
+  "Mobile Development",
   "Web Application",
   "API Development",
   "Other",
@@ -50,7 +48,7 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white pt-24 pb-24">
+      <main className="min-h-screen bg-white pt-32 pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Header */}
           <div className="max-w-2xl mb-16">
@@ -68,8 +66,40 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_400px] gap-12">
-            {/* Form */}
+          <div className="grid lg:grid-cols-[420px_1fr] gap-8">
+
+            {/* ── Left — info ── */}
+            <div className="space-y-4">
+              {/* Info cards */}
+              {contactInfo.map((item) => {
+                const Icon = item.icon;
+                const Wrapper = item.href ? "a" : "div";
+                return (
+                  <Wrapper
+                    key={item.label}
+                    {...(item.href ? { href: item.href } : {})}
+                    className={`group flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white hover:border-zinc-200 hover:shadow-sm transition-all ${item.href ? "cursor-pointer" : ""}`}
+                  >
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors"
+                      style={{ background: item.accent + "12" }}
+                    >
+                      <Icon size={17} style={{ color: item.accent }} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">
+                        {item.label}
+                      </p>
+                      <p className="text-sm font-semibold text-black truncate group-hover:text-[#FF751F] transition-colors">
+                        {item.value}
+                      </p>
+                    </div>
+                  </Wrapper>
+                );
+              })}
+            </div>
+
+            {/* ── Right — form ── */}
             <div className="bg-zinc-50 rounded-3xl border border-zinc-100 p-8 sm:p-10">
               <form className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-5">
@@ -116,7 +146,7 @@ export default function ContactPage() {
                     {services.map((s) => (
                       <label key={s} className="cursor-pointer">
                         <input type="checkbox" className="sr-only peer" />
-                        <span className="inline-block px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black transition select-none">
+                        <span className="inline-block px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-zinc-300 transition select-none">
                           {s}
                         </span>
                       </label>
@@ -168,63 +198,6 @@ export default function ContactPage() {
               </form>
             </div>
 
-            {/* Contact info sidebar */}
-            <div className="space-y-6">
-              {/* Info cards */}
-              {contactInfo.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.label}
-                    className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-zinc-50"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center flex-shrink-0">
-                      <Icon size={16} className="text-[#FF751F]" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1">
-                        {item.label}
-                      </p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="text-sm font-semibold text-black hover:text-[#FF751F] transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="text-sm font-semibold text-black">
-                          {item.value}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* FAQ card */}
-              <div className="rounded-2xl bg-zinc-950 p-6">
-                <h3 className="text-white font-bold mb-3">Before you reach out</h3>
-                <ul className="space-y-2 text-sm text-zinc-400">
-                  <li className="flex gap-2">
-                    <span className="text-[#FF751F] font-bold">→</span>
-                    We work with startups and growing companies
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#FF751F] font-bold">→</span>
-                    Projects typically start at $3,000
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#FF751F] font-bold">→</span>
-                    We work remotely across all timezones
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#FF751F] font-bold">→</span>
-                    MVP builds take 4–8 weeks on average
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </main>

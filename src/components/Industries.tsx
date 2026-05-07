@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronLeft, ChevronRight,
   ShoppingBag, CreditCard, Cpu, Heart, Building2, GraduationCap,
@@ -16,31 +16,20 @@ const industries = [
   { name: "EdTech",          bg: "#00C6A9", dark: false, icon: GraduationCap, tag: "Future Learning",    desc: "LMS, live classrooms, and AI tutors built for modern learners." },
 ];
 
-const VISIBLE = 3.5; // 3 full cards + half of 4th as scroll hint
 const GAP = 20;
-const MAX_PAGE = industries.length - Math.floor(VISIBLE); // 3
 
 type Industry = typeof industries[number];
 
-function IndustryCard({ ind, index }: { ind: Industry; index: number }) {
+function IndustryCard({ ind }: { ind: Industry }) {
   const Icon = ind.icon;
   const tc = ind.dark ? "#0f0f0f" : "#fff";
-  const num = String(index + 1).padStart(2, "0");
   const glassAlpha = ind.dark ? "0,0,0" : "255,255,255";
 
   return (
     <div
-      className="relative flex-none rounded-3xl overflow-hidden h-96"
-      style={{ background: ind.bg, width: "calc(min(100vw, 72rem) / 3.5 - 17px)" }}
+      className="industry-card relative flex-none rounded-3xl overflow-hidden h-[360px] sm:h-96 w-[82vw] sm:w-[calc((100vw-3rem)/2.2-11px)] lg:w-[calc(min(100vw,72rem)/3.5-17px)] max-w-[400px] sm:max-w-none"
+      style={{ background: ind.bg }}
     >
-      {/* Big faded number — background texture */}
-      <div
-        className="absolute -bottom-6 -right-3 text-[128px] font-black leading-none select-none pointer-events-none"
-        style={{ color: tc, opacity: 0.07, letterSpacing: "-0.04em" }}
-      >
-        {num}
-      </div>
-
       {/* Subtle radial glow at top */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -75,7 +64,7 @@ function IndustryCard({ ind, index }: { ind: Industry; index: number }) {
           </span>
         </div>
 
-        {/* Bottom text + arrow */}
+        {/* Bottom text */}
         <div className="mt-auto">
           <p className="text-2xl font-black leading-tight mb-2" style={{ color: tc }}>
             {ind.name}
@@ -93,16 +82,33 @@ export function Industries() {
   const maskRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [touch, setTouch] = useState(0);
+  const [visible, setVisible] = useState(3.5);
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      setVisible(w < 640 ? 1.15 : w < 1024 ? 2.2 : 3.5);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const maxPage = Math.max(0, industries.length - Math.floor(visible));
+
+  // Clamp page if visible changes (e.g. on resize past breakpoint)
+  useEffect(() => {
+    setPage((p) => Math.min(p, maxPage));
+  }, [maxPage]);
 
   const getStep = () => {
-    // Cap at content width (max-w-6xl = 1152px) so cards stay consistent regardless of viewport
-    const w = Math.min(maskRef.current?.offsetWidth ?? 1152, 1152);
-    return w / VISIBLE + 2.86;
+    const card = maskRef.current?.querySelector(".industry-card") as HTMLElement | null;
+    return (card?.offsetWidth ?? 300) + GAP;
   };
 
   const move = (dir: "prev" | "next") => {
     setPage((p) => {
-      if (dir === "next") return Math.min(MAX_PAGE, p + 1);
+      if (dir === "next") return Math.min(maxPage, p + 1);
       return Math.max(0, p - 1);
     });
   };
@@ -114,12 +120,12 @@ export function Industries() {
 
       {/* Header — constrained to content width */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-12">
           <div>
             <p className="text-sm font-semibold text-[#FF751F] uppercase tracking-widest mb-3">
               Our Expertise
             </p>
-            <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
               Industries
               <br />
               <span className="text-zinc-600">We Excel In.</span>
@@ -128,7 +134,7 @@ export function Industries() {
 
           <div className="flex items-center gap-4 flex-shrink-0">
             <span className="text-sm text-zinc-500 font-medium tabular-nums hidden sm:block">
-              {String(page + 1).padStart(2, "0")} — {String(MAX_PAGE + 1).padStart(2, "0")}
+              {String(page + 1).padStart(2, "0")} — {String(maxPage + 1).padStart(2, "0")}
             </span>
             <div className="flex items-center gap-2">
               <button
@@ -136,7 +142,7 @@ export function Industries() {
                 aria-label="Previous"
                 disabled={page === 0}
                 className={cn(
-                  "w-11 h-11 rounded-full border flex items-center justify-center transition-all cursor-pointer",
+                  "w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all cursor-pointer",
                   page === 0
                     ? "border-zinc-800 bg-zinc-900 text-zinc-700 cursor-not-allowed"
                     : "border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:border-zinc-600"
@@ -147,10 +153,10 @@ export function Industries() {
               <button
                 onClick={() => move("next")}
                 aria-label="Next"
-                disabled={page === MAX_PAGE}
+                disabled={page === maxPage}
                 className={cn(
-                  "w-11 h-11 rounded-full flex items-center justify-center transition-all cursor-pointer",
-                  page === MAX_PAGE
+                  "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all cursor-pointer",
+                  page === maxPage
                     ? "bg-zinc-800 text-zinc-600 cursor-not-allowed"
                     : "bg-white text-black hover:bg-zinc-200"
                 )}
@@ -180,8 +186,8 @@ export function Industries() {
             transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          {industries.map((ind, i) => (
-            <IndustryCard key={ind.name} ind={ind} index={i} />
+          {industries.map((ind) => (
+            <IndustryCard key={ind.name} ind={ind} />
           ))}
         </div>
       </div>
@@ -189,7 +195,7 @@ export function Industries() {
       {/* Dots — back in content container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-center gap-2 mt-8">
-          {Array.from({ length: MAX_PAGE + 1 }).map((_, i) => (
+          {Array.from({ length: maxPage + 1 }).map((_, i) => (
             <button
               key={i}
               onClick={() => setPage(i)}

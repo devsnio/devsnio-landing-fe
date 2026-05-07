@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -15,6 +16,12 @@ const links = [
 export function Navbar() {
   const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href.startsWith("/#")) return false;
+    return pathname === href;
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -67,17 +74,30 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-0.5">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="relative group px-4 py-2 text-sm font-medium text-zinc-600 hover:text-black transition-colors duration-200 rounded-xl hover:bg-zinc-100"
-              >
-                {l.label}
-                {/* Orange dot indicator */}
-                <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#FF751F] scale-0 group-hover:scale-100 transition-transform duration-200 origin-center" />
-              </a>
-            ))}
+            {links.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className={cn(
+                    "relative group px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-xl",
+                    active
+                      ? "text-black bg-zinc-100"
+                      : "text-zinc-600 hover:text-black hover:bg-zinc-100"
+                  )}
+                >
+                  {l.label}
+                  {/* Orange dot indicator */}
+                  <span
+                    className={cn(
+                      "absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#FF751F] transition-transform duration-200 origin-center",
+                      active ? "scale-100" : "scale-0 group-hover:scale-100"
+                    )}
+                  />
+                </a>
+              );
+            })}
           </nav>
 
           {/* CTA + mobile toggle */}

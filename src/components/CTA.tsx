@@ -54,12 +54,12 @@ export function CTA() {
 
               {/* Email CTA */}
               <a
-                href="mailto:hello@devsnio.com"
+                href="mailto:info@devsnio.com"
                 className="group flex items-center justify-between gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all rounded-2xl px-6 py-5 cursor-pointer"
               >
                 <div>
                   <p className="text-white font-black text-base leading-tight">Send an Email</p>
-                  <p className="text-zinc-500 text-xs mt-0.5">hello@devsnio.com</p>
+                  <p className="text-zinc-500 text-xs mt-0.5">info@devsnio.com</p>
                 </div>
                 <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors">
                   <Mail size={15} className="text-zinc-300" />

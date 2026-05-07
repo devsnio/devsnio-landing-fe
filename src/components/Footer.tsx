@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { Mail, MessageSquare } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const footerLinks = {
   Services: [
-    { label: "AI Automation", href: "/#services" },
-    { label: "AI Development", href: "/#services" },
-    { label: "Custom Software", href: "/#services" },
+    { label: "MVP Development", href: "/#services" },
     { label: "SaaS Building", href: "/#services" },
+    { label: "Custom Software", href: "/#services" },
+    { label: "AI Development", href: "/#services" },
+    { label: "Mobile Development", href: "/#services" },
+    { label: "AI Automation", href: "/#services" },
   ],
   Company: [
     { label: "About", href: "/#why-us" },
@@ -30,11 +32,11 @@ export function Footer() {
           <div className="col-span-2">
             <a href="/" className="inline-block mb-4 select-none" aria-label="devsnio home">
               <Image
-                src="/logo.svg"
+                src="/logo-white.svg"
                 alt="devsnio"
-                width={110}
-                height={25}
-                className="h-6 w-auto brightness-0 invert"
+                width={120}
+                height={28}
+                className="h-7 w-auto"
               />
             </a>
             <p className="text-sm leading-relaxed max-w-xs mb-5">
@@ -43,20 +45,11 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="mailto:hello@devsnio.com"
+                href="mailto:info@devsnio.com"
                 className="flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-white transition-colors bg-zinc-900 px-3 py-2 rounded-lg"
               >
                 <Mail size={12} />
-                hello@devsnio.com
-              </a>
-              <a
-                href="https://wa.me/880"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-white transition-colors bg-zinc-900 px-3 py-2 rounded-lg"
-              >
-                <MessageSquare size={12} />
-                WhatsApp
+                info@devsnio.com
               </a>
             </div>
           </div>
