@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Cookie Policy — devsnio",
-  description: "devsnio cookie policy — what cookies we use and how to manage them.",
-};
+export const metadata: Metadata = buildMetadata({
+  path: "/cookies",
+  title: "Cookie Policy",
+  description: "What cookies devsnio uses and how to manage them.",
+  noIndex: true,
+});
 
 const cookieTypes = [
   {

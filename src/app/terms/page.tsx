@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms of Service — devsnio",
-  description: "devsnio terms of service — the terms governing use of our services and website.",
-};
+export const metadata: Metadata = buildMetadata({
+  path: "/terms",
+  title: "Terms of Service",
+  description: "The terms governing use of devsnio services and website.",
+  noIndex: true,
+});
 
 export default function TermsPage() {
   return (

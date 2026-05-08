@@ -7,21 +7,40 @@ import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
 
 const chartBars = [55, 72, 45, 88, 60, 78, 95, 65, 82, 70];
-const rotatingWords = ["AI-Powered", "Automated", "Intelligent", "Scalable", "Future-Ready"];
+const rotatingWords = ["MVPs", "SaaS", "Mobile Apps", "AI Tools", "Web Apps"];
 
-const pipelineStages = [
-  [{ label: "Ingest data", done: true }, { label: "Process & embed", done: false }, { label: "Deploy model", done: false }],
-  [{ label: "Ingest data", done: true }, { label: "Process & embed", done: true }, { label: "Deploy model", done: false }],
-  [{ label: "Ingest data", done: true }, { label: "Process & embed", done: true }, { label: "Deploy model", done: true }],
+const sprintStages = [
+  [
+    { label: "Auth & onboarding", done: true },
+    { label: "Stripe integration", done: false },
+    { label: "Admin dashboard", done: false },
+  ],
+  [
+    { label: "Auth & onboarding", done: true },
+    { label: "Stripe integration", done: true },
+    { label: "Admin dashboard", done: false },
+  ],
+  [
+    { label: "Auth & onboarding", done: true },
+    { label: "Stripe integration", done: true },
+    { label: "Admin dashboard", done: true },
+  ],
 ];
 
 const revenueValues = ["$124,800", "$126,420", "$128,910", "$131,200"];
+
+const deployVersions = [
+  { version: "v2.4.0", build: "12s" },
+  { version: "v2.4.1", build: "9s" },
+  { version: "v2.5.0", build: "14s" },
+];
 
 export function Hero() {
   const [wordIdx, setWordIdx] = useState(0);
   const [visible, setVisible] = useState(true);
   const [stageIdx, setStageIdx] = useState(0);
   const [revenueIdx, setRevenueIdx] = useState(0);
+  const [deployIdx, setDeployIdx] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,12 +54,17 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => setStageIdx((s) => (s + 1) % pipelineStages.length), 2000);
+    const id = setInterval(() => setStageIdx((s) => (s + 1) % sprintStages.length), 2000);
     return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
     const id = setInterval(() => setRevenueIdx((r) => (r + 1) % revenueValues.length), 3200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setDeployIdx((d) => (d + 1) % deployVersions.length), 4500);
     return () => clearInterval(id);
   }, []);
 
@@ -187,7 +211,7 @@ export function Hero() {
                   <div className="p-4 relative">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <p className="text-[9px] text-zinc-400 font-semibold uppercase tracking-wider">Revenue</p>
+                        <p className="text-[9px] text-zinc-400 font-semibold uppercase tracking-wider">Monthly Revenue</p>
                         <p
                           key={revenueIdx}
                           className="text-lg font-black text-black tabular-nums"
@@ -219,7 +243,7 @@ export function Hero() {
 
                     {/* Mini stats */}
                     <div className="grid grid-cols-3 gap-2">
-                      {[["2.4M", "AI calls"], ["98ms", "Latency"], ["99.9%", "Uptime"]].map(([v, l]) => (
+                      {[["12.4k", "Active users"], ["98ms", "p95 latency"], ["99.9%", "Uptime"]].map(([v, l]) => (
                         <div key={l} className="bg-zinc-50 border border-zinc-100 rounded-xl p-2">
                           <p className="text-xs font-black text-black">{v}</p>
                           <p className="text-[9px] text-zinc-400 mt-0.5">{l}</p>
@@ -230,7 +254,7 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* ── Floating card: Deploy status (top-right) ── */}
+              {/* ── Floating card: Shipped (top-right) ── */}
               <div
                 style={{
                   position: "absolute",
@@ -240,19 +264,27 @@ export function Hero() {
                 }}
               >
                 <div
-                  className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-3 shadow-2xl min-w-[160px]"
+                  className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-3 shadow-2xl min-w-[170px]"
                   style={{ animation: "hero-float-mid 5.5s ease-in-out infinite" }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                    <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wide">Deploy Success</span>
+                    <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wide">Shipped</span>
                   </div>
-                  <p className="text-xs text-zinc-300 font-mono font-semibold">ai-agent-v2.0.1</p>
-                  <p className="text-[10px] text-zinc-500 mt-1">48 / 48 tests passed</p>
+                  <p
+                    key={deployIdx}
+                    className="text-xs text-zinc-300 font-mono font-semibold"
+                    style={{ animation: "fade-in 0.4s ease-out" }}
+                  >
+                    {deployVersions[deployIdx].version}
+                  </p>
+                  <p className="text-[10px] text-zinc-500 mt-1">
+                    Build {deployVersions[deployIdx].build} · 124/124 tests
+                  </p>
                 </div>
               </div>
 
-              {/* ── Floating card: AI Pipeline steps (left) ── */}
+              {/* ── Floating card: Sprint progress (left) ── */}
               <div
                 style={{
                   position: "absolute",
@@ -262,15 +294,15 @@ export function Hero() {
                 }}
               >
                 <div
-                  className="bg-white border border-zinc-200 rounded-2xl px-4 py-3 shadow-xl min-w-[148px]"
+                  className="bg-white border border-zinc-200 rounded-2xl px-4 py-3 shadow-xl min-w-[160px]"
                   style={{ animation: "hero-float-fast 4.5s ease-in-out infinite", animationDelay: "0.6s" }}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">AI Pipeline</p>
+                    <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Sprint 18</p>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#FF751F] animate-pulse" />
                   </div>
                   <div className="space-y-2">
-                    {pipelineStages[stageIdx].map((step) => (
+                    {sprintStages[stageIdx].map((step) => (
                       <div key={step.label} className="flex items-center gap-2 transition-all duration-300">
                         <div
                           className="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors duration-500"
@@ -296,7 +328,7 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* ── Floating card: Model trained (bottom-right) ── */}
+              {/* ── Floating card: App Store rating (bottom-right) ── */}
               <div
                 style={{
                   position: "absolute",
@@ -310,19 +342,24 @@ export function Hero() {
                   style={{ animation: "hero-float-slow 6.5s ease-in-out infinite", animationDelay: "1.2s" }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#FF751F] flex items-center justify-center flex-shrink-0 relative">
-                      <span className="text-white text-[10px] font-black">AI</span>
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF751F] to-[#FF4E9F] flex items-center justify-center flex-shrink-0 relative">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.5 12.5c0-1.6.9-3 2.2-3.7-.7-1-1.9-1.7-3.2-1.7-1.4 0-2.5.7-3.5.7-.9 0-2.1-.7-3.5-.7-1.7 0-3.5 1-4.5 2.7C2.6 13.3 4 19 6.5 21.7c.9 1 2 2.2 3.4 2.2 1.3 0 1.8-.8 3.4-.8s2 .8 3.4.8c1.4 0 2.4-1.2 3.3-2.3.7-.8 1.2-1.7 1.5-2.7-3-1.1-3-4.3 0-5.4zM14.4 5.6c.9-1 1.4-2.4 1.3-3.6-1.2.1-2.6.8-3.3 1.7-.7.8-1.3 2.2-1.2 3.5 1.3.1 2.4-.6 3.2-1.6z"/>
+                      </svg>
                       <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-white animate-pulse" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-black">Model trained</p>
-                      <p className="text-[10px] text-zinc-400 mt-0.5">Accuracy: 94.2%</p>
+                      <p className="text-xs font-bold text-black flex items-center gap-1">
+                        4.9 <span className="text-[#FF751F]">★</span>
+                        <span className="text-[9px] text-zinc-400 font-medium">App Store</span>
+                      </p>
+                      <p className="text-[10px] text-zinc-400 mt-0.5">12k+ reviews</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* ── Floating card: Response time (bottom-left) ── */}
+              {/* ── Floating card: Performance (bottom-left) ── */}
               <div
                 style={{
                   position: "absolute",
@@ -332,14 +369,17 @@ export function Hero() {
                 }}
               >
                 <div
-                  className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-3 shadow-xl min-w-[120px]"
+                  className="bg-zinc-950 border border-zinc-800 rounded-2xl px-4 py-3 shadow-xl min-w-[130px]"
                   style={{ animation: "hero-float-mid 5s ease-in-out infinite", animationDelay: "0.3s" }}
                 >
+                  <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                    Lighthouse
+                  </p>
                   <div className="flex items-baseline gap-1">
                     <p className="text-2xl font-black text-white tabular-nums">98</p>
-                    <p className="text-xs font-bold text-zinc-400">ms</p>
+                    <p className="text-xs font-bold text-emerald-400">/ 100</p>
                   </div>
-                  <p className="text-[10px] text-zinc-500 mt-0.5">Avg response time</p>
+                  <p className="text-[10px] text-zinc-500 mt-0.5">Performance score</p>
                   {/* Mini sparkline */}
                   <div className="flex items-end gap-0.5 mt-2 h-3">
                     {[40, 60, 30, 70, 45, 80, 55, 65].map((h, i) => (

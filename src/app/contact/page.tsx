@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
+import { buildMetadata, contactPageSchema, breadcrumbSchema } from "@/lib/seo";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Contact Us — devsnio",
+export const metadata: Metadata = buildMetadata({
+  path: "/contact",
+  title: "Contact Us",
   description:
-    "Get in touch with devsnio. Tell us about your project and we'll respond within 24 hours.",
-};
+    "Get in touch with devsnio. Tell us about your project — we read every message and reply within 24 hours.",
+  keywords: ["contact devsnio", "hire AI agency", "software development inquiry"],
+});
 
 const contactInfo = [
   {
@@ -47,6 +51,15 @@ const services = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          contactPageSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       <Navbar />
       <main className="min-h-screen bg-white pt-32 pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">

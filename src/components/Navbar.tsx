@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const links = [
-  { label: "Services",  href: "/#services" },
-  { label: "Why Us",    href: "/#why-us"   },
-  { label: "Process",   href: "/#process"  },
-  { label: "Contact",   href: "/contact"   },
+  { label: "Services",        href: "/#services" },
+  { label: "Hire Developers", href: "/hire-developers" },
+  { label: "Why Us",          href: "/#why-us"   },
+  { label: "Contact",         href: "/contact"   },
 ];
 
 export function Navbar() {

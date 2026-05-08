@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy — devsnio",
-  description: "devsnio privacy policy — how we collect, use, and protect your data.",
-};
+export const metadata: Metadata = buildMetadata({
+  path: "/privacy",
+  title: "Privacy Policy",
+  description: "How devsnio collects, uses, and protects your data.",
+  noIndex: true,
+});
 
 export default function PrivacyPage() {
   return (
