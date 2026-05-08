@@ -57,20 +57,6 @@ export function HireHero() {
       {/* ── Content ── */}
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
 
-        {/* Live status pill */}
-        <div className="inline-flex items-center gap-2 bg-zinc-950 rounded-full pl-2 pr-4 py-1.5 mb-8">
-          <span className="inline-flex items-center gap-1.5 bg-[#FF751F] rounded-full px-2 py-0.5">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-white opacity-75 animate-ping" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
-            </span>
-            <span className="text-[10px] font-bold text-white uppercase tracking-widest">Live</span>
-          </span>
-          <span className="text-xs font-medium text-zinc-300">
-            <strong className="text-white">23</strong> engineers browsing this page
-          </span>
-        </div>
-
         {/* Headline + decorative chips wrapper (relative for positioning) */}
         <div className="relative mb-7">
           {/* Decorative floating chips — siblings of h1, no inherited tracking */}
@@ -106,9 +92,9 @@ export function HireHero() {
             Dhaka, BD
           </span>
 
-          {/* Headline — always 2 lines via whitespace-nowrap on each line */}
-          <h1 className="text-[40px] sm:text-6xl lg:text-[80px] font-black tracking-tight leading-[1.05] text-black">
-            <span className="block whitespace-nowrap">
+          {/* Headline — wraps naturally on mobile, locks to 2 lines on sm+ */}
+          <h1 className="text-[36px] sm:text-6xl lg:text-[80px] font-black tracking-tight leading-[1.08] sm:leading-[1.05] text-black">
+            <span className="block sm:whitespace-nowrap">
               Build with{" "}
               <span className="relative inline-block align-baseline">
                 <span
@@ -125,7 +111,7 @@ export function HireHero() {
                 </span>
               </span>
             </span>
-            <span className="block whitespace-nowrap">
+            <span className="block sm:whitespace-nowrap">
               at a third the <span className="text-zinc-300">price.</span>
             </span>
           </h1>
