@@ -49,7 +49,8 @@ const services = [
 ];
 
 export function Services() {
-  const [hovered, setHovered] = useState<number | null>(null);
+  // One card is always open. Hover swaps which one — never closes to "none".
+  const [hovered, setHovered] = useState<number>(0);
 
   return (
     <section id="services" className="bg-white pb-24 sm:pb-32">
@@ -90,7 +91,8 @@ export function Services() {
                   transition: "background 0.35s cubic-bezier(0.4,0,0.2,1)",
                 }}
                 onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
+                onFocus={() => setHovered(i)}
+                tabIndex={0}
               >
                 {/* Title — always visible, color switches */}
                 <h3
