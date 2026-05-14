@@ -121,11 +121,25 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendMail({
+    const info = await sendMail({
       subject: `New project inquiry — ${parsed.data.name}`,
       html: renderHtml(parsed.data),
       text: renderText(parsed.data),
       replyTo: parsed.data.email,
+    });
+
+    // Log SMTP server response so we can verify delivery in Vercel logs
+    console.log("[/api/contact] mail accepted by SMTP", {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      pending: info.pending,
+      response: info.response,
+      envelope: info.envelope,
+      from: process.env.MAIL_FROM,
+      to: process.env.MAIL_TO,
+      smtp_user: process.env.SMTP_USER,
+      smtp_host: process.env.SMTP_HOST,
     });
 
     return NextResponse.json({ ok: true });
