@@ -112,8 +112,8 @@ export default function CookiesPage() {
               <h2 className="text-xl font-bold text-black mb-3">Questions?</h2>
               <p>
                 For any questions about our use of cookies, contact us at{" "}
-                <a href="mailto:privacy@devsnio.com" className="text-black underline font-medium">
-                  privacy@devsnio.com
+                <a href="mailto:info@devsnio.com" className="text-black underline font-medium">
+                  info@devsnio.com
                 </a>.
               </p>
             </section>

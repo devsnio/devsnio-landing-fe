@@ -88,7 +88,7 @@ export default function PrivacyPage() {
                 <li>Right to restrict or object to processing</li>
                 <li>Right to data portability</li>
               </ul>
-              <p className="mt-3">To exercise any of these rights, email us at <a href="mailto:privacy@devsnio.com" className="text-black underline font-medium">privacy@devsnio.com</a>.</p>
+              <p className="mt-3">To exercise any of these rights, email us at <a href="mailto:info@devsnio.com" className="text-black underline font-medium">info@devsnio.com</a>.</p>
             </section>
 
             <section>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
               <p>
                 If you have questions about this Privacy Policy, please contact us at:<br />
                 <strong className="text-black">devsnio</strong><br />
-                Email: <a href="mailto:privacy@devsnio.com" className="text-black underline">privacy@devsnio.com</a>
+                Email: <a href="mailto:info@devsnio.com" className="text-black underline">info@devsnio.com</a>
               </p>
             </section>
           </div>

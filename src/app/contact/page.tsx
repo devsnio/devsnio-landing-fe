@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { ContactForm } from "@/components/ContactForm";
 import { buildMetadata, contactPageSchema, breadcrumbSchema } from "@/lib/seo";
 import { Mail, Phone, MapPin } from "lucide-react";
 
@@ -35,17 +36,6 @@ const contactInfo = [
     href: null,
     accent: "#7B5CFF",
   },
-];
-
-const services = [
-  "AI Automation",
-  "AI Development",
-  "Custom Software",
-  "SaaS Building",
-  "Mobile Development",
-  "Web Application",
-  "API Development",
-  "Other",
 ];
 
 export default function ContactPage() {
@@ -113,103 +103,7 @@ export default function ContactPage() {
             </div>
 
             {/* ── Right — form ── */}
-            <div className="bg-zinc-50 rounded-3xl border border-zinc-100 p-8 sm:p-10">
-              <form className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-black mb-2">
-                      Name <span className="text-[#FF751F]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Your full name"
-                      className="w-full h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm text-black placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-black mb-2">
-                      Email <span className="text-[#FF751F]">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="you@company.com"
-                      className="w-full h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm text-black placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-black mb-2">
-                    Company / Project name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Acme Inc."
-                    className="w-full h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm text-black placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-black mb-2">
-                    Service needed
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {services.map((s) => (
-                      <label key={s} className="cursor-pointer">
-                        <input type="checkbox" className="sr-only peer" />
-                        <span className="inline-block px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-zinc-300 transition select-none">
-                          {s}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-black mb-2">
-                    Budget range
-                  </label>
-                  <select className="w-full h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition appearance-none">
-                    <option value="">Select a range...</option>
-                    <option>Under $5,000</option>
-                    <option>$5,000 – $15,000</option>
-                    <option>$15,000 – $50,000</option>
-                    <option>$50,000+</option>
-                    <option>Not sure yet</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-black mb-2">
-                    Tell us about your project{" "}
-                    <span className="text-[#FF751F]">*</span>
-                  </label>
-                  <textarea
-                    required
-                    rows={5}
-                    placeholder="Describe what you're building, the problem it solves, and any technical requirements..."
-                    className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-black placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full h-14 rounded-full bg-black text-white text-base font-semibold hover:bg-zinc-800 transition-colors cursor-pointer"
-                >
-                  Send Message →
-                </button>
-
-                <p className="text-xs text-zinc-400 text-center">
-                  By submitting this form you agree to our{" "}
-                  <a href="/privacy" className="underline hover:text-black">
-                    Privacy Policy
-                  </a>
-                  .
-                </p>
-              </form>
-            </div>
+            <ContactForm />
 
           </div>
         </div>

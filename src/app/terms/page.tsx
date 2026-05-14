@@ -117,8 +117,8 @@ export default function TermsPage() {
               <h2 className="text-xl font-bold text-black mb-3">12. Contact</h2>
               <p>
                 Questions about these Terms? Reach us at{" "}
-                <a href="mailto:legal@devsnio.com" className="text-black underline font-medium">
-                  legal@devsnio.com
+                <a href="mailto:info@devsnio.com" className="text-black underline font-medium">
+                  info@devsnio.com
                 </a>.
               </p>
             </section>
