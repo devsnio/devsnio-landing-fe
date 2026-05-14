@@ -41,7 +41,7 @@ export function ContactForm() {
       services: selectedServices,
       budget: String(formData.get("budget") ?? ""),
       message: String(formData.get("message") ?? "").trim(),
-      website: String(formData.get("website") ?? ""), // honeypot
+      hp_field_x9: String(formData.get("hp_field_x9") ?? ""), // honeypot
     };
 
     setStatus("submitting");
@@ -94,15 +94,20 @@ export function ContactForm() {
   return (
     <div className="bg-zinc-50 rounded-3xl border border-zinc-100 p-8 sm:p-10">
       <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-        {/* Honeypot — hidden from humans, bots fill it */}
-        <input
-          type="text"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-          className="absolute left-[-9999px] w-px h-px opacity-0"
-          aria-hidden="true"
-        />
+        {/* Honeypot — visually hidden + obscure name so browser autofill
+            (Chrome was eating real submissions when this was named "website"). */}
+        <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", top: "auto", width: "1px", height: "1px", overflow: "hidden" }}>
+          <label htmlFor="hp_field_x9">Leave this blank</label>
+          <input
+            id="hp_field_x9"
+            type="text"
+            name="hp_field_x9"
+            tabIndex={-1}
+            autoComplete="off"
+            data-form-type="other"
+            defaultValue=""
+          />
+        </div>
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>

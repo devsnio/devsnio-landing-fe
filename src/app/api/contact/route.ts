@@ -11,8 +11,9 @@ const contactSchema = z.object({
   services: z.array(z.string()).max(10).optional(),
   budget: z.string().max(80).optional().or(z.literal("")),
   message: z.string().min(10, "Tell us a bit more about your project").max(5000),
-  // Honeypot — checked manually below, accept any value here
-  website: z.string().optional(),
+  // Honeypot — uncommon field name so browser autofill doesn't trip it.
+  // Checked manually below; accept any value here.
+  hp_field_x9: z.string().optional(),
 });
 
 function escape(s: string | undefined | null) {
@@ -108,8 +109,14 @@ export async function POST(request: Request) {
     );
   }
 
-  // Honeypot — silently drop bot submissions
-  if (parsed.data.website) {
+  // Honeypot — silently drop bot submissions, but log so we can verify
+  // it's not eating real ones (e.g. zealous browser autofill).
+  if (parsed.data.hp_field_x9) {
+    console.warn("[/api/contact] honeypot triggered", {
+      email: parsed.data.email,
+      name: parsed.data.name,
+      hp_value: parsed.data.hp_field_x9,
+    });
     return NextResponse.json({ ok: true });
   }
 
